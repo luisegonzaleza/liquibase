@@ -1,0 +1,43 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="Luis Eduardo G (generated)" id="1622224132906-1">
+        <createTable tableName="catalog">
+            <column name="CATALOG_ID" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622224132906-2">
+        <createTable tableName="store">
+            <column autoIncrement="true" name="ID_STORE" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="NAME" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UBICATION" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622224132906-3">
+        <createTable tableName="videogame">
+            <column autoIncrement="true" name="ID_VIDEOGAME" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="CATEGORY" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONSOLE" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="DECIMAL(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622224132906-4">
+        <addForeignKeyConstraint baseColumnNames="ID_VIDEOGAME" baseTableName="videogame" constraintName="FK_VIDEOGAME_STORE" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID_STORE" referencedTableName="store" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

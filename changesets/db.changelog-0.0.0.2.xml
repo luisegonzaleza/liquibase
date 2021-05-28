@@ -1,0 +1,69 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-1">
+        <createTable tableName="address">
+            <column autoIncrement="true" name="address_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="country" type="VARCHAR(60)"/>
+            <column name="street" type="VARCHAR(100)"/>
+            <column name="cp" type="VARCHAR(10)"/>
+            <column name="user_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-2">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="user_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="email" type="VARCHAR(60)"/>
+            <column name="password" type="VARCHAR(60)"/>
+            <column name="user_information_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-3">
+        <createTable tableName="user_information">
+            <column autoIncrement="true" name="user_information_id" type="INT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(40)"/>
+            <column name="last_name" type="VARCHAR(60)"/>
+            <column name="phone" type="VARCHAR(10)"/>
+            <column name="birthdate" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-4">
+        <createIndex indexName="user_id" tableName="address">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-5">
+        <createIndex indexName="user_information_id" tableName="user">
+            <column name="user_information_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-6">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="address" constraintName="address_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="user_id" referencedTableName="user" validate="true"/>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-7">
+        <addForeignKeyConstraint baseColumnNames="user_information_id" baseTableName="user" constraintName="user_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="user_information_id" referencedTableName="user_information" validate="true"/>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-8">
+        <dropForeignKeyConstraint baseTableName="videogame" constraintName="FK_VIDEOGAME_STORE"/>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-9">
+        <dropUniqueConstraint constraintName="ID_STORE" tableName="store"/>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-10">
+        <dropUniqueConstraint constraintName="ID_VIDEOGAME" tableName="videogame"/>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-11">
+        <dropTable tableName="catalog"/>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-12">
+        <dropTable tableName="store"/>
+    </changeSet>
+    <changeSet author="Luis Eduardo G (generated)" id="1622225362824-13">
+        <dropTable tableName="videogame"/>
+    </changeSet>
+</databaseChangeLog>

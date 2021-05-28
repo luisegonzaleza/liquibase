@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<databaseChangeLog 
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"> 
+    
+    <changeSet author="luis" id="changelog-1.00">
+        <createTable tableName="videogame">
+            <column name="ID_VIDEOGAME" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="CATEGORY" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+            <column name="CONSOLE" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+            <column name="PRICE" type="number">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="luis" id="changelog-1.01">
+        <createTable tableName="store">
+            <column name="ID_STORE" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="NAME" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+            <column name="UBICATION" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Rollback -->
+    <changeSet author="LUIS" id="changelog-1.04">
+        <createTable tableName="CATALOG">
+            <column name="CATALOG_ID" type="int">
+                <constraints primaryKey="true" primaryKeyName="PK_CATALOG"/>
+            </column>
+            <column name="DESCRIPTION" type="nvarchar(100)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="CATALOG"/>
+        </rollback>
+    </changeSet>
+
+    <!-- Generar constraints -->
+    <changeSet author="luis" id="changelog-1.02">
+        <addForeignKeyConstraint baseColumnNames="ID_VIDEOGAME" baseTableName="videogame" constraintName="FK_VIDEOGAME_STORE" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="ID_STORE" referencedTableName="store"/>
+    </changeSet>
+
+    <!-- Generar Inserts -->
+    <changeSet author="luis" id="changelog-1.03">
+        <insert tableName="store">
+            <column name="ID_STORE" value="1"/>
+            <column name="NAME" value="Gamers"/>
+            <column name="UBICATION" value="Perisur"/>
+        </insert>
+
+        <insert tableName="videogame">
+            <column name="ID_VIDEOGAME" value="1"/>
+            <column name="CATEGORY" value="Terror"/>
+            <column name="CONSOLE" value="Xbox One"/>
+            <column name="PRICE" value="1999"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="luis" id="changelog-1.06">
+        <sqlFile endDelimiter="//" path="./sql/stored_proc.sql" stripComments="true" />
+        <sql>call GetAllVideogames();</sql>
+    </changeSet>
+
+    <!-- Changelog de una bd existente -->
+    <!--
+    liquibase ??changeLogFile="changesets/db.changelog-0.0.0.0.xml" generateChangeLog
+    -->
+
+    <!-- Diferencias entre bd -->
+    <!--
+    liquibase ??changeLogFile="changesets/db.changelog-0.0.0.2.xml" diffChangeLog
+    -->
+
+</databaseChangeLog> 
